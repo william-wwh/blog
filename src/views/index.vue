@@ -1,7 +1,7 @@
 <template>
-    <el-container>
+    <el-container v-infinite-scroll="handleCurrentChange">
         <el-main class="me-articles">
-            <ArticleItem v-for="article in articles" :key="article.id" v-bind="article"></ArticleItem>
+            <ArticleScrollPage ref="ArticleScrollPageLoad" ></ArticleScrollPage>
         </el-main>
         <el-aside>Aside</el-aside>
     </el-container>
@@ -9,43 +9,15 @@
 
 
 <script setup>
-import { reactive } from 'vue'
-import ArticleItem from '@/components/article/ArticleItem.vue'
-const articles = reactive([
-    {
-        id: 1,
-        weight: 1,
-        title: '文章标题0',
-        commentCounts: 100,
-        viewCounts: 100,
-        summary: "概要11",
-        author: "作者0",
-        tags:[{"tagName":"vue"}],
-        createDate: '2024-05-01',
-    },
-    {
-        id: 2,
-        weight: 1,
-        title: '文章标题1',
-        commentCounts: 200,
-        viewCounts: 300,
-        summary: "概要22",
-        author: "作者1",
-        tags:[{"tagName":"H5"}],
-        createDate: '2024-05-02 19:14',
-    },
-    {
-        id: 3,
-        weight: 4,
-        title: '文章标题2',
-        commentCounts: 210,
-        viewCounts: 320,
-        summary: "概要33",
-        author: "作者2",
-        tags:[{"tagName":"CSS"}],
-        createDate: '2024-05-02',
-    },
-])
+import { ref,onMounted } from "vue"
+import ArticleScrollPage from '@/components/common/ArticleScrollPage.vue'
+const ArticleScrollPageLoad = ref(null)
+onMounted(()=>{
+    ArticleScrollPageLoad.value.getArticles()
+})
+const handleCurrentChange = ()=>{
+    ArticleScrollPageLoad.value.getArticles()
+}
 </script>
 
 <style scoped>
@@ -55,6 +27,7 @@ const articles = reactive([
 .el-main{
     padding: 0;
     line-height: 16px;
+    overflow: unset;
 }
 .el-aside{
     margin-left: 20px;

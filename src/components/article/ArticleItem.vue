@@ -7,7 +7,7 @@
                 <el-icon><Comment /></el-icon>&nbsp;{{  commentCounts }}
             </span>
             <span class="me-pull-right me-article-count">
-                <el-icon><View /></el-icon>&nbsp;{{  viewCounts }}
+                <el-icon><View /></el-icon>&nbsp;{{  viewCount }}
             </span>
         </div>
         <div class="me-artile-description">
@@ -17,7 +17,7 @@
             <span class="me-article-author">
                 <el-icon><UserFilled /></el-icon><el-tag>{{ author }}</el-tag>
             </span>
-            <el-tag v-for="t in tags" :key="t.tagName" size="mini" type="success">{{ t.tagName }}</el-tag>
+            <el-tag v-for="t in tags" :key="t.tagName" type="success">{{ t.tagName }}</el-tag>
             <span class="me-pull-right me-article-count">
                 <el-icon><Timer /></el-icon>&nbsp; {{ createDateComputed }}
             </span>
@@ -32,18 +32,19 @@ import { Comment, View, UserFilled, Timer} from '@element-plus/icons-vue'
 import formatTime from "@/utils/time.js"
 const props = defineProps({
     title: String,
+    weight: Number,
     commentCounts: Number,
-    viewCounts: Number,
+    viewCount: Number,
     summary: String,
     author: String,
     tags: Array,
-    createDate: String
+    date: String
 })
 const view = (id) => {
     router.push(`/article/${id}`)
 }
 const createDateComputed = computed(() => {
-    return formatTime( props.createDate )
+    return formatTime( props.date )
 })
 
 </script>
