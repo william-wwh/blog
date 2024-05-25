@@ -9,4 +9,7 @@ import GoTop from './components/gotop/GoTop.vue'
 </template>
 
 <style >
+body {
+  background-color: #f5f5f5;
+}
 </style>

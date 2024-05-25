@@ -8,8 +8,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
 import ArticleItem from "@/components/article/ArticleItem.vue";
+import {getArticleList} from "@/api/article"
 const loading = ref(false);
 
 const index = ref(1);
@@ -18,12 +18,11 @@ const noData = ref(false)
 const getArticles  = () => {
     if (loading.value || noData.value) return    // 正在加载与没有数据直接跳出
     loading.value = true;
-    axios.get("http://localhost:8000/article/list/?page="+index.value)
+    getArticleList(index.value)
         .then(res => {
             if (res.status === 200) {
                 noData.value = res.data.noData   // 如果没有了数据 设置为true
-                const data = res.data.results;
-                console.log("aaa");
+                const data = res.data.data;
                 if (data.length === 0) {
                     loading.value = false;
                     return
@@ -31,7 +30,6 @@ const getArticles  = () => {
                 articles.value = [...articles.value, ...data];
                 loading.value = false;
                 index.value++;
-                console.log(articles.value)
             }
             
         })

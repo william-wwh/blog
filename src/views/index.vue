@@ -3,7 +3,7 @@
         <el-main class="me-articles">
             <ArticleScrollPage ref="ArticleScrollPageLoad" ></ArticleScrollPage>
         </el-main>
-        <el-aside>Aside</el-aside>
+        <el-aside><AsideBar /></el-aside>
     </el-container>
 </template>
 
@@ -11,6 +11,7 @@
 <script setup>
 import { ref,onMounted } from "vue"
 import ArticleScrollPage from '@/components/common/ArticleScrollPage.vue'
+import AsideBar from "@/components/common/AsideBar.vue";
 const ArticleScrollPageLoad = ref(null)
 onMounted(()=>{
     ArticleScrollPageLoad.value.getArticles()
