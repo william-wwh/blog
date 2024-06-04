@@ -20,3 +20,12 @@ export function getArticleContent(id){
         url: "/article/?id="+id,
     })
 }
+// 提交文章
+export function postArticle(data){
+    return request({
+        method: "POST",
+        url: "/article/",
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: data
+    })
+}

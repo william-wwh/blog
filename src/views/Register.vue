@@ -7,11 +7,11 @@
                 <span>Username</span>
             </div>
             <div class="inputBox">
-                <input type="password" required="required" v-model="password">
+                <input type="password" required="required" v-model="password" maxlength="33" show-word-limit>
                 <span>Password</span>
             </div>
             <div class="inputBox">
-                <input type="password" required="required" v-model="passwordAgain">
+                <input type="password" required="required" v-model="passwordAgain" maxlength="33" show-word-limit>
                 <span>Password again</span>
             </div>
         </div>

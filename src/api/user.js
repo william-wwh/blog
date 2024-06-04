@@ -22,3 +22,12 @@ export function doRegister(data){
         data: data,
     })
 }
+
+export function doChangePassword(data){
+    return request({
+        method: "POST",
+        url: "user/changePassword/",
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: data,
+    })
+}

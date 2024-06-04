@@ -14,8 +14,7 @@
                     :default-active="activeIndex" 
                     mode="horizontal">
                     <el-menu-item index="/">首页</el-menu-item>
-                    <el-menu-item index="class">文章分类</el-menu-item>
-                    <el-menu-item index="writer">
+                    <el-menu-item index="/writer" v-if="user.login">
                         <el-icon><Edit /></el-icon>写文章
                     </el-menu-item>
                 </el-menu>
@@ -35,9 +34,7 @@
                         <el-menu-item index="/register">注册</el-menu-item>
                     </template>
                     <template v-else>
-                        <template slot="title">
-                            {{ user.username }}
-                        </template>
+                        <el-menu-item index="/about" >{{ user.username }}</el-menu-item>
                         <el-menu-item index @click="logout"><el-icon><Back /></el-icon>退出</el-menu-item>
                     </template>
                 </el-menu>
@@ -63,13 +60,22 @@
         })
         const logout = async () => {
             user.value.login = false;
-            await cookieStore.delete({name: 'username'})
-            await cookieStore.delete({name: 'password'})
+            await cookieStore.delete('username')
+            await cookieStore.delete('password')
             user.value.username = ""
         }
         const user = ref({
             login: false,
             username: ""
+        })
+        onMounted(async ()=>{
+            let username = await cookieStore.get('username')
+            if(username == null){
+                user.value.login = false
+            }else{
+                user.value.login = true
+                user.value.username = username.value
+            }
         })
         // 监听路由变化，更新activeIndex
         watch(route, (newRoute) => { 
@@ -79,7 +85,7 @@
         cookieStore.addEventListener('change', e => {
             if(e.changed.length!=0 && e.changed[0].name == "username"){
                 user.value.login = true
-                user.value.username = e.changed[0].name
+                user.value.username = e.changed[0].value
             }
             if(e.deleted.length!=0 && e.deleted[0].name == "username"){
                 user.value.login = false
