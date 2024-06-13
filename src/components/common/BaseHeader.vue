@@ -46,11 +46,12 @@
     <script setup>
         import { ref, watch, onMounted} from 'vue'
         import { Edit,Back } from '@element-plus/icons-vue'
-        import { RouterView,useRoute } from 'vue-router'
+        import { useRouter,useRoute } from 'vue-router'
 
         // 使用 useRoute 获取当前路由
-        const route = useRoute()
-        const activeIndex = ref(route.path)
+        const router = useRouter()
+        const route  = useRoute()
+        const activeIndex = ref(router.path)
         defineProps({
             activeIndex: String,
             simple: {
@@ -63,6 +64,7 @@
             await cookieStore.delete('username')
             await cookieStore.delete('password')
             user.value.username = ""
+            router.push("/")
         }
         const user = ref({
             login: false,

@@ -7,7 +7,7 @@ export function doLogin(data){
     // axios.defaults.withCredentials = true;
     return request({
         method: "POST",
-        url: "user/",
+        url: "api/user/",
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: data,
     })
@@ -17,7 +17,7 @@ export function doLogin(data){
 export function doRegister(data){
     return request({
         method: "POST",
-        url: "user/register/",
+        url: "api/user/register/",
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: data,
     })
@@ -26,7 +26,7 @@ export function doRegister(data){
 export function doChangePassword(data){
     return request({
         method: "POST",
-        url: "user/changePassword/",
+        url: "api/user/changePassword/",
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: data,
     })
