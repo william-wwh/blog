@@ -3,7 +3,7 @@
         <el-row class="me-header">
             <el-col :span="3" class="me-header-left">
                 <router-link to="/" class="me-title">
-                    <img src="../../assets/images/logo.png" alt="">
+                    <h2 style="color: black;">blog</h2>
                 </router-link>
             </el-col>
             <el-col v-if="!simple" :span="15">
@@ -114,6 +114,7 @@
         margin-top: 10px;
         font-size: 24px;
         height: 100%;
+        text-decoration: none;
     }
     .me-header{
         flex-wrap: nowrap;

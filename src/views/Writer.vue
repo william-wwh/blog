@@ -54,7 +54,9 @@ const onSubmit = () => {
     }
     postArticle(data)
         .then((e) =>{
-            console.log(e);
+            if(e.data.code == 201){
+                alert("发布成功")
+            }
         })
 }
 </script>

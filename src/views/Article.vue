@@ -5,16 +5,16 @@
             <el-text size="small">{{data.date}}</el-text>
             <el-text tag="div" class="content">{{data.content}}</el-text>
         </div>
-        <div class="commit box">
+        <div class="commit box" v-show="showComment != ''">
             <div class="item"  v-for="item in showComment">
                 <div class="header">
                     <div>{{ item.username }}:</div>
                     <div>{{ item.date }}</div>
                 </div>
-                <hr>
                 <div class="commitContent">
                     {{ item.content }}
                 </div>
+                <hr>
             </div>
         </div>
         <div class="commit box" v-if="login">
@@ -72,6 +72,8 @@
                 showComment.value = e.data.data
             }
         })
+    console.log(showComment.value.content.repeat("\n","<br>"))
+    console.log( showComment.value.content);
     const commentSubmit = () => {
         let commentData={
             articleId:props.id,
@@ -80,7 +82,15 @@
         }
         postComment(commentData)
             .then((e) => {
-                console.log(e);
+                if(e.data.code = 201){
+                    alert("评论发布成功")
+                    getComment(props.id)
+                        .then((e)=>{
+                            if( e.data.code == 200){
+                                showComment.value = e.data.data
+                            }
+                        })
+                }
             })
     }
     
