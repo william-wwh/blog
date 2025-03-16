@@ -72,7 +72,7 @@
                 showComment.value = e.data.data
             }
         })
-    console.log(showComment.value.content.repeat("\n","<br>"))
+    // console.log(showComment.value.content.repeat("\n","<br>"))
     console.log( showComment.value.content);
     const commentSubmit = () => {
         let commentData={
